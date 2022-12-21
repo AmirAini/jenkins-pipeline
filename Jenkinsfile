@@ -3,25 +3,27 @@ def gv
 pipeline {
     agent any
     stages {
-        stage("init") {
-            steps {
-                script {
-                    gv = load "script.groovy"
-                }
-            }
+       
+       //test stage
+       stage("test"){
+        steps{
+            //where the scripts run (according to CLI)
+            echo "example: npm test"
         }
-        stage("build jar") {
+       }
+        //build stage
+        stage("build") {
             steps {
                 script {
-                    echo "building jar"
+                    echo "example: npm build"
                     //gv.buildJar()
                 }
             }
         }
-        stage("build image") {
+        stage("build docker image") {
             steps {
                 script {
-                    echo "building image"
+                    echo "exmaple: docker build -t <name>:<tag>"
                     //gv.buildImage()
                 }
             }
@@ -29,10 +31,11 @@ pipeline {
         stage("deploy") {
             steps {
                 script {
-                    echo "deploying"
+                    echo "example: docker push <domainRegistery (AWS ECR)>:name"
                     //gv.deployApp()
                 }
             }
         }
+        //after the deployment of docker in Repo, server would pull image, run docker-compose and pull DB from dockerHub
     }   
 }
