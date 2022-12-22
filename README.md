@@ -6,4 +6,5 @@
       - This is to run cmds inside the jenkins container for automation purposes
   3) Configure Jenkins in port <server>:8080 to run scripts 
       - Tried running scripts using freestyle jobs and pipeline jobs
-      - run pipeline jobs with parameters and variables
+      - run pipeline jobs with parameters, variables, groovy
+      - run multipipeline jobs
