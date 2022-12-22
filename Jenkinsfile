@@ -2,10 +2,20 @@ def gv
 
 pipeline {
     agent any
+    	parameters{
+			boolean(name:"executeTest", defaultVaue:"", description:"")
+			choice(name: "version", choices:[”1.0”,”1.1”], description:"")
+   }
     stages {
        
        //test stage
        stage("test"){
+        when{
+				expression{
+          //put param
+					params.executeTest == true
+				}
+			}
         steps{
             //where the scripts run (according to CLI)
             echo "example: npm test"
@@ -16,6 +26,7 @@ pipeline {
             steps {
                 script {
                     echo "example: npm build"
+                    echo "deploying version ${params.version}"
                     //gv.buildJar()
                 }
             }
