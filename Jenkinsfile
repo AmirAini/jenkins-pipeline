@@ -4,7 +4,7 @@ pipeline {
     agent any
     	parameters{
 			boolean(name:"executeTest", defaultVaue:"", description:"")
-			choice(name: "version", choices:[”1.0”,”1.1”], description:"")
+			choice(name: "VERSION", choices:[”1.0”,”1.1”], description:"")
    }
     stages {
        
