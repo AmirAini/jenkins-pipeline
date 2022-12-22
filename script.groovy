@@ -12,8 +12,9 @@ def buildImage() {
     // }
 } 
 
-def deployApp() {
+def deployApp() {  
     echo 'deploying the application...'
+    
     // echo "version deploying ${params.version}"
 } 
 

@@ -33,9 +33,16 @@ pipeline {
         }
 
         stage("deploy") {
+              input{
+                message "input the version"
+                parameters{
+                    choice(name:"env", choices:["staging","production","testing"], description:"")
+                }
+            }   
             steps {
                 script {
                     gv.deployApp()
+                    echo "deployed to ${env}"  //this is not global thats why
                 }
             }
         }
