@@ -43,7 +43,7 @@ pipeline {
     } 
     post{
         always{
-            echo "version is ${version}"
+            echo "version is ${params.version}"
         }
     }
 }
