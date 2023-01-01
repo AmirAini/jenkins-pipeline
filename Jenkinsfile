@@ -41,8 +41,12 @@ pipeline {
             }   
             steps {
                 script {
-                    gv.deployApp()
-                    echo "deployed to ${env}"  //this is not global thats why
+                    //define the EC2 instance
+                    def dockerCmd = "docker run -d -p 3000:3080 amirdockerrepo/try.app:1.0"
+                    //run the cmd
+                    sshagent(['ec2-cred']){
+                        sh "ssh -o StrictHostKeyChecking=no amiraini@172.23.251.223 ${dockerCmd}"
+                    }
                 }
             }
         }
