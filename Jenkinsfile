@@ -39,16 +39,16 @@ pipeline {
                     choice(name:"env", choices:["staging","production","testing"], description:"")
                 }
             }   
-            steps {
-                script {
-                    //define the EC2 instance
-                    def dockerCmd = "docker run -d -p 3000:3080 amirdockerrepo/try.app:1.0"
-                    //run the cmd
-                    sshagent(['ec2-cred']){
-                        sh "ssh -o StrictHostKeyChecking=no amiraini@172.23.251.223 ${dockerCmd}"
-                    }
-                }
-            }
+            steps{
+		        script{
+                    //store the var
+                    def dockerCommand="docker-compose -d -f docker-compose.yml up"
+                    //ssh for the scp file to EC2
+                    sh "scp docker-compose.yml ec2-user@32.523.123.13:/home/ec2-user"
+                    //ssh to jenkins to run in EC2 with var
+                    sh "ssh -o StrictHostKeyChecking=no <user>@<server> ${dockerCommand}"
+		        }
+	        }
         }
         //after the deployment of docker in Repo, server would pull image, run docker-compose and pull DB from dockerHub
     } 
