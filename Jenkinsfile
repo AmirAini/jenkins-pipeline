@@ -42,11 +42,12 @@ pipeline {
             steps{
 		        script{
                     //store the var
-                    def dockerCommand="docker-compose -d -f docker-compose.yml up"
+                    def shellCmd= "bash ./shellCmd.sh"
                     //ssh for the scp file to EC2
+                    sh "scp shellCmd.sh ec2-user@32.523.123.13:/home/ec2-user"
                     sh "scp docker-compose.yml ec2-user@32.523.123.13:/home/ec2-user"
                     //ssh to jenkins to run in EC2 with var
-                    sh "ssh -o StrictHostKeyChecking=no <user>@<server> ${dockerCommand}"
+                    sh "ssh -o StrictHostKeyChecking=no <user>@<server> ${shellCmd}"
 		        }
 	        }
         }
