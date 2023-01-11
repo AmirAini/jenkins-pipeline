@@ -1,4 +1,6 @@
-﻿# jenkins-pipeline
+
+ # Transfer notion notes here.
+ # jenkins-pipeline
 
 - Create a designated server to run jenkins script using docker
   1) run a jenkins container in the server with mounted volumes 
